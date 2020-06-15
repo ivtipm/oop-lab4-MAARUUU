@@ -127,20 +127,27 @@ namespace DataBase
 
         private void btnAddRecord_Click(object sender, EventArgs e)
         {
-            string modelFullName = textBoxFullName.Text;
-            string modelName= textBoxName.Text;
-            ushort year = (ushort)Convert.ToInt32(textBoxYear.Text);
-            byte weight = (byte)Convert.ToInt32(textBoxWeight.Text);
-            byte height = (byte)Convert.ToInt32(textBoxHeight.Text);
-            textBoxFullName.Text = "";
-            textBoxName.Text = "";
-            textBoxYear.Text = "";
-            textBoxWeight.Text = "";
-            textBoxHeight.Text = "";
-            MemberProfile m = new MemberProfile(modelFullName,modelName, year, weight,height);
-            work.AddProfile(m);
-            int n = work.MemberProfile.Count;
-            dataGridViewTable.Rows.Add(modelFullName, modelName, year, weight, height);
+            try
+            {
+                string modelFullName = textBoxFullName.Text;
+                string modelName = textBoxName.Text;
+                ushort year = (ushort)Convert.ToInt32(textBoxYear.Text);
+                byte weight = (byte)Convert.ToInt32(textBoxWeight.Text);
+                byte height = (byte)Convert.ToInt32(textBoxHeight.Text);
+                textBoxFullName.Text = "";
+                textBoxName.Text = "";
+                textBoxYear.Text = "";
+                textBoxWeight.Text = "";
+                textBoxHeight.Text = "";
+                MemberProfile m = new MemberProfile(modelFullName, modelName, year, weight, height);
+                work.AddProfile(m);
+                int n = work.MemberProfile.Count;
+                dataGridViewTable.Rows.Add(modelFullName, modelName, year, weight, height);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"Ошибка: {exception.Message}");
+            }
         }
 
         private void btnClearRow_Click(object sender, EventArgs e)
